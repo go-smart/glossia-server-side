@@ -1,0 +1,24 @@
+crossbar:
+  image: vinelab/crossbar
+  ports:
+    - "8080:8080"
+  volumes:
+    - ./web:/.crossbar
+gssa:
+  image: numaengineering/gssa
+  environment:
+    CROSSBAR_PORT: 8080
+    CROSSBAR_HOST: crossbar
+    DOCKERLAUNCH_SOCKET: /docker-launch.sock
+  links:
+    - crossbar
+  volumes:
+    - /var/run/docker-launch/docker-launch.sock:/docker-launch.sock
+    - simulations:/var/run/gssa
+  volumes_from:
+    - data
+data:
+  image: numaengineering/gssa
+  entrypoint: /bin/true
+  volumes:
+    - /simdata

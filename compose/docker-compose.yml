@@ -4,8 +4,8 @@ crossbar:
     - "8080:8080"
   volumes:
     - ./web:/.crossbar
-gssa:
-  image: numaengineering/gssa
+glossia:
+  image: numaengineering/glossia
   environment:
     CROSSBAR_PORT: 8080
     CROSSBAR_HOST: crossbar
@@ -14,11 +14,12 @@ gssa:
     - crossbar
   volumes:
     - /var/run/docker-launch/docker-launch.sock:/docker-launch.sock
-    - simulations:/var/run/gssa
+    - simulations:/var/run/glossia
   volumes_from:
     - data
 data:
-  image: numaengineering/gssa
+  image: numaengineering/glossia
   entrypoint: /bin/true
   volumes:
     - /simdata
+    - transferrer:/tmp/gssa-transferrer

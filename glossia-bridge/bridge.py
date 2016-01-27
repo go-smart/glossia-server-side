@@ -72,7 +72,11 @@ class DockerBridgeHandler(AIOEventHandler, FileSystemEventHandler):
         logging.info("Server started")
 
     def copy(self):
-        shutil.copytree(self._input_directory, self._output_directory[0])
+        shutil.copytree(
+            self._input_directory,
+            self._output_directory[0],
+            ignore=shutil.ignore_patterns('*.sock')
+        )
         # Ensures everything is in place on the FS when the modified event fires
         os.rename(*self._output_directory)
 

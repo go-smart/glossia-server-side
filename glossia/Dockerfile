@@ -9,7 +9,7 @@ RUN apt-get install -y python python-pip python3 python3-pip libjsoncpp-dev cmak
 
 RUN pip3 install munkres autobahn hachiko
 
-ENV GSSA_COMMIT fff73a4ee0ae2060e7d57724511cd7ab00eafd5c
+ENV GSSA_COMMIT fe5cf48
 RUN cd /usr/src && git clone https://github.com/numa-engineering/gosmart-gssa.git gssa && cd gssa && git checkout ${GSSA_COMMIT}
 
 RUN mkdir -p /opt/gssa

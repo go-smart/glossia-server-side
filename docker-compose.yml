@@ -5,7 +5,7 @@ crossbar:
   volumes:
     - ./web:/.crossbar
 glossia:
-  image: numaengineering/glossia
+  image: gosmart/glossia
   environment:
     CROSSBAR_PORT: 8080
     CROSSBAR_HOST: crossbar
@@ -18,7 +18,7 @@ glossia:
   volumes_from:
     - data
 data:
-  image: numaengineering/glossia
+  image: gosmart/glossia
   entrypoint: /bin/true
   volumes:
     - /simdata

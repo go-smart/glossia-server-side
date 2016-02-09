@@ -14,7 +14,7 @@ glossia:
     - crossbar
   volumes:
     - /var/run/docker-launch/docker-launch.sock:/docker-launch.sock
-    - simulations:/var/run/glossia
+    - ./simulations:/var/run/glossia
   volumes_from:
     - data
 data:
@@ -22,4 +22,4 @@ data:
   entrypoint: /bin/true
   volumes:
     - /simdata
-    - transferrer:/tmp/gssa-transferrer
+    - ./transferrer:/tmp/gssa-transferrer

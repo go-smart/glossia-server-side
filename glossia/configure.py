@@ -19,7 +19,7 @@ try:
         config = yaml.safe_load(f)
 except (OSError, KeyError) as e:
     logging.error(
-        "You must provide one arg: the gssa.yml file to configure"
+        "You must provide one arg: the glossia.yml file to configure"
     )
     raise
 

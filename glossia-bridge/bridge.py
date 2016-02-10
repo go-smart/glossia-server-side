@@ -13,9 +13,9 @@ from hachiko.hachiko import AIOEventHandler
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-gssa_prefix = '/simdata'
+glossia_prefix = '/simdata'
 container_prefix = '/shared'
-gssa_socket_name = 'update.sock'
+glossia_socket_name = 'update.sock'
 
 
 @asyncio.coroutine
@@ -57,8 +57,8 @@ class DockerBridgeHandler(AIOEventHandler, FileSystemEventHandler):
     @asyncio.coroutine
     def update_socket_relay(self, update_socket):
         logging.info("Starting bridge socket")
-        gssa_socket = update_socket
-        _, writer = yield from asyncio.open_unix_connection(gssa_socket, loop=self._loop)
+        glossia_socket = update_socket
+        _, writer = yield from asyncio.open_unix_connection(glossia_socket, loop=self._loop)
         logging.info("Connected")
         socket_location = os.path.join('/shared', 'update.sock')
         yield from asyncio.start_unix_server(
@@ -66,8 +66,8 @@ class DockerBridgeHandler(AIOEventHandler, FileSystemEventHandler):
             socket_location,
             loop=self._loop
         )
-        uid = pwd.getpwnam('gssa').pw_uid
-        gid = grp.getgrnam('gssa').gr_gid
+        uid = pwd.getpwnam('glossia').pw_uid
+        gid = grp.getgrnam('glossia').gr_gid
         os.chown(socket_location, uid, gid)
         logging.info("Server started")
 
@@ -89,11 +89,11 @@ class DockerBridgeHandler(AIOEventHandler, FileSystemEventHandler):
 
 
 @asyncio.coroutine
-def run(loop, gssa_id):
+def run(loop, glossia_id):
     input_observer = Observer()
     output_observer = Observer()
 
-    input_prefix = os.path.join(gssa_prefix, gssa_id)
+    input_prefix = os.path.join(glossia_prefix, glossia_id)
 
     input_event_handler = DockerBridgeHandler(
         partial(exit, None, input_observer),
@@ -111,7 +111,7 @@ def run(loop, gssa_id):
         loop=loop
     )
 
-    update_socket = os.path.join(input_prefix, gssa_socket_name)
+    update_socket = os.path.join(input_prefix, glossia_socket_name)
     yield from input_event_handler.update_socket_relay(update_socket)
 
     input_observer.schedule(input_event_handler, input_prefix)

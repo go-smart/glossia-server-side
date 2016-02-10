@@ -1,35 +1,35 @@
 FROM ubuntu:15.10
 
-RUN adduser --system --quiet --home /var/lib/gssa --no-create-home --shell /bin/false --group --gecos "Go-Smart Simulation Server" gssa
+RUN adduser --system --quiet --home /var/lib/glossia --no-create-home --shell /bin/false --group --gecos "Go-Smart Simulation Server" glossia
 
 RUN apt-get update
 
 RUN apt-get install -y python python-pip python3 python3-pip libjsoncpp-dev cmake python3-yaml git python3-lxml \
                        python3-zope.interface python3-paramiko
 
-RUN pip3 install munkres autobahn hachiko
+RUN pip3 install munkres 'autobahn<=0.11.0' hachiko
 
-ENV GSSA_COMMIT f408fbb
-RUN cd /usr/src && git clone https://github.com/numa-engineering/gosmart-gssa.git gssa && cd gssa && git checkout ${GSSA_COMMIT}
+ENV GSSA_COMMIT 8df559f
+RUN cd /usr/src && git clone https://github.com/go-smart/glossia.git glossia && cd glossia && git checkout ${GSSA_COMMIT}
 
-RUN mkdir -p /opt/gssa
+RUN mkdir -p /opt/glossia
 
-WORKDIR /opt/gssa
+WORKDIR /opt/glossia
 
 ENV GSSA_PREFIX=/usr/local
-RUN cmake /usr/src/gssa -DCMAKE_INSTALL_PREFIX=${GSSA_PREFIX}
+RUN cmake /usr/src/glossia -DCMAKE_INSTALL_PREFIX=${GSSA_PREFIX}
 
 RUN make
 
 RUN make install
 
-RUN mkdir -p /var/run/gssa /var/lib/gssa
+RUN mkdir -p /var/run/glossia /var/lib/glossia
 
-RUN chown -R gssa:gssa /var/run/gssa
+RUN chown -R glossia:glossia /var/run/glossia
 
-VOLUME /var/run/gssa
+VOLUME /var/run/glossia
 
-WORKDIR /var/run/gssa
+WORKDIR /var/run/glossia
 
 COPY env.sh configure.py /
 

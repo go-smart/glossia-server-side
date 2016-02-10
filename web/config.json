@@ -36,8 +36,7 @@
                      "directory": "static"
                   },
                   "ws": {
-                     "type": "websocket",
-                  "debug": true
+                     "type": "websocket"
                   }
                }
             }

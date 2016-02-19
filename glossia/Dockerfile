@@ -7,9 +7,9 @@ RUN apt-get update
 RUN apt-get install -y python python-pip python3 python3-pip libjsoncpp-dev cmake python3-yaml git python3-lxml \
                        python3-zope.interface python3-paramiko
 
-RUN pip3 install munkres 'autobahn<=0.11.0' hachiko
+RUN pip3 install munkres 'autobahn<=0.11.0' hachiko pyroute2
 
-ENV GSSA_COMMIT 8df559f
+ENV GSSA_COMMIT 64223c
 RUN cd /usr/src && git clone https://github.com/go-smart/glossia.git glossia && cd glossia && git checkout ${GSSA_COMMIT}
 
 RUN mkdir -p /opt/glossia

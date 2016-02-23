@@ -17,6 +17,7 @@ glossia:
     - ./simulations:/var/run/glossia
   volumes_from:
     - data
+  command: default
 data:
   image: gosmart/glossia
   entrypoint: /bin/true

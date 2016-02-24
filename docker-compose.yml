@@ -22,5 +22,5 @@ data:
   image: gosmart/glossia
   entrypoint: /bin/true
   volumes:
-    - /simdata
+    - ./simdata:/simdata
     - ./transferrer:/tmp/gssa-transferrer

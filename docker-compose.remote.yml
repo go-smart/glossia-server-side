@@ -1,0 +1,16 @@
+glossia:
+  image: gosmart/glossia
+  environment:
+    CROSSBAR_PORT: __CROSSBAR_PORT__
+    CROSSBAR_HOST: __CROSSBAR_HOST__
+    DOCKERLAUNCH_SOCKET: /docker-launch.sock
+  volumes:
+    - /var/run/docker-launch/docker-launch.sock:/docker-launch.sock
+    - ./simulations:/var/run/glossia
+  volumes_from:
+    - data
+data:
+  image: gosmart/glossia
+  entrypoint: /bin/true
+  volumes:
+    - ./simdata:/simdata

@@ -1,5 +1,5 @@
 crossbar:
-  image: vinelab/crossbar
+  image: gosmart/crossbar
   ports:
     - "8080:8080"
   volumes:

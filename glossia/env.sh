@@ -6,7 +6,7 @@ export PORT="${CROSSBAR_PORT}"
 mkdir -p /var/run/glossia
 cd /var/run/glossia
 
-python3 /configure.py ${GSSA_PREFIX}/etc/gosmart/glossia.yml
+python3 /configure.py ${GLOSSIA_PREFIX}/etc/gosmart/glossia.yml
 
 groupadd -g `stat -c "%g" "${DOCKERLAUNCH_SOCKET}"` dockerlaunch
 

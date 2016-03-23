@@ -4,6 +4,7 @@ glossia:
     CROSSBAR_PORT: __CROSSBAR_PORT__
     CROSSBAR_HOST: __CROSSBAR_HOST__
     DOCKERLAUNCH_SOCKET: /docker-launch.sock
+    GLOSSIA_SIMULATION_DIRECTORY: /simdata
   volumes:
     - /var/run/docker-launch/docker-launch.sock:/docker-launch.sock
     - ./simulations:/var/run/glossia

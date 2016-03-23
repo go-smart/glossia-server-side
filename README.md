@@ -28,3 +28,6 @@ The simulation server (Glossia) may be launched by the command
 Note that the host must have a running `dockerlaunchd` instance, with a socket in
 `/var/run/docker-launch/docker-launch.sock` accessible to the `dockerlaunch`
 user group.
+
+If Crossbar is interrupted unexpectedly, you may need to manually remove the `node.pid` file from
+the `web` subdirectory.

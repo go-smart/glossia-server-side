@@ -9,11 +9,12 @@ glossia:
   environment:
     CROSSBAR_PORT: 8080
     CROSSBAR_HOST: crossbar
-    DOCKERLAUNCH_SOCKET: /docker-launch.sock
+    DOCKERLAUNCH_SOCKET: /dockerlaunch.sock
+    GLOSSIA_SIMULATION_DIRECTORY: /simdata
   links:
     - crossbar
   volumes:
-    - /var/run/docker-launch/docker-launch.sock:/docker-launch.sock
+    - /var/run/dockerlaunch/dockerlaunch.sock:/dockerlaunch.sock
     - ./simulations:/var/run/glossia
   volumes_from:
     - data

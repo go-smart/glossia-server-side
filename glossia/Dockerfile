@@ -9,7 +9,7 @@ RUN apt-get install -y python python-pip python3 python3-pip libjsoncpp-dev cmak
 
 RUN pip3 install munkres 'autobahn<=0.12.1' hachiko pyroute2
 
-ENV GLOSSIA_COMMIT 51411a5
+ENV GLOSSIA_COMMIT 587e5dd
 RUN cd /usr/src && git clone https://github.com/go-smart/glossia.git glossia && cd glossia && git checkout ${GLOSSIA_COMMIT}
 
 RUN mkdir -p /opt/glossia
